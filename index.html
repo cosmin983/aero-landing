@@ -11,7 +11,7 @@
 <meta property="og:image" content="share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#eeeeeb">
+<meta name="theme-color" content="#edeae4">
 <!-- <link rel="canonical" href="https://[the client's domain]/"> -->
 <meta name="site-kind" content="other">
 <meta name="page-type" content="product">
@@ -27,10 +27,16 @@
 <link rel="stylesheet" href="assets/vendor/lenis.css">
 <style>
 :root {
-  --p-bg: #eeeeeb; --p-surface: #e1e1dd; --p-ink: #1c1d1f; --p-muted: #5c5e62;
-  --p-accent: #c2501b; --p-accent-ink: #ffffff; --p-action: #c2501b; --p-action-ink: #ffffff;
-  --p-inv-bg: #1c1d1f; --p-inv-surface: #28292b; --p-inv-ink: #eeeeeb; --p-inv-muted: #969796;
-  --p-inv-accent: #c2501b; --p-inv-accent-ink: #ffffff; --p-inv-action: #c2501b; --p-inv-action-ink: #ffffff;
+  /* three colours: paper #edeae4, charcoal #1c1c1e, electric blue #2b4fe8 (hue 228, 203 degrees from the warm ground and photos at about 25) */
+  --paper: #edeae4; --charcoal: #1c1c1e; --blue: #2b4fe8;
+  --p-bg: var(--paper); --p-surface: color-mix(in oklab, var(--paper) 94%, var(--charcoal));
+  --p-ink: var(--charcoal); --p-muted: color-mix(in oklab, var(--charcoal) 72%, var(--paper));
+  --p-accent: var(--blue); --p-accent-ink: var(--paper); --p-action: var(--blue); --p-action-ink: var(--paper);
+  --p-inv-bg: var(--charcoal); --p-inv-surface: color-mix(in oklab, var(--charcoal) 92%, var(--paper));
+  --p-inv-ink: var(--paper); --p-inv-muted: color-mix(in oklab, var(--paper) 78%, var(--charcoal));
+  --p-inv-accent: var(--blue); --p-inv-accent-ink: var(--paper); --p-inv-action: var(--blue); --p-inv-action-ink: var(--paper);
+  /* a paper grain, neutral grey specks with alpha, laid on every ground */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .44 0 0 0 0 .42 0 0 0 .55 -.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   --font-display: "Bricolage Grotesque", system-ui, sans-serif;
   --font-text: "Figtree", system-ui, sans-serif;
   --display-weight: 400;
@@ -46,10 +52,35 @@
 <link rel="modulepreload" href="assets/moments/photo-chapters/moment.js">
 <!-- page CSS: only what sits inside a visual or the order card, and one --p-h per card group -->
 <style>
-  ::selection { background: color-mix(in oklab, var(--p-accent) 28%, transparent); color: var(--p-ink); }
-  html { accent-color: var(--p-accent); -webkit-tap-highlight-color: transparent; }
+  ::selection { background: color-mix(in oklab, var(--charcoal) 16%, transparent); color: inherit; }
+  html { accent-color: var(--charcoal); -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline-color: var(--ink); }
+  .mark { background: var(--ink); }
+  .menu-col a:hover, .footer ul a:hover, .footer__nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  /* physical texture: paper grain on every ground (no flat fills) */
+  body, .nav, main > section:is(.section, .hero), footer.closing { background-image: var(--grain); background-size: 180px 180px; }
+  .accent-word { color: var(--p-accent); }
+  /* the huge subject: the lamp, mirrored so its light bar reaches over the headline, bleeding off the right and bottom edges */
+  .hero--huge { position: relative; overflow: clip; }
+  .hero--huge .wrap { position: relative; z-index: 1; }
+  .hero--huge .hero__head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-5); max-width: min(760px, 56vw); }
+  .hero--huge .hero__head > div { display: grid; gap: var(--s-5); }
+  .hero--huge h1 { font-size: clamp(44px, 7.2vw, 108px); line-height: .98; letter-spacing: -0.04em; margin: 0; max-width: 11ch; }
+  .hero--huge .hero__lead { max-width: 30ch; margin: 0; }
+  @media (min-width: 640px) { .hero--huge .hero__head > .btn-row { display: flex; flex-direction: row; flex-wrap: nowrap; width: auto; align-self: flex-start; } }
+  .hero__subject { position: absolute; z-index: 0; right: -4.8vw; bottom: -9.5svh; height: 96svh; width: auto; max-width: none;
+                   transform: scaleX(-1); pointer-events: none; user-select: none; }
+  @media (max-width: 1023px) {
+    .hero--huge .hero__head { max-width: 62vw; }
+    .hero__subject { height: 56svh; right: -8vw; bottom: -2svh; }
+  }
+  @media (max-width: 639px) {
+    .hero--huge .hero__head { max-width: none; }
+    .hero--huge .btn-row { position: relative; z-index: 1; }
+    .hero__subject { height: 44svh; right: -24vw; bottom: -2svh; }
+    .hero--huge .btn-row { flex-wrap: wrap; }
+  }
   .menu-card .panel { --p-h: 200px; }
-  .hero--product .hero__stage > #aero-hero { inset: -7% 0 0 0; }
   #benefits .panel { --p-h: 340px; }
   #benefits .panel--render { background: var(--g-alt); }
   #benefits .panel--render > .frame { position: absolute; inset: 0; }
@@ -66,15 +97,15 @@
   .opt__name { font: 500 var(--t-card)/1.3 var(--font-text); }
   .opt__line { grid-column: 2; color: var(--muted); font-size: var(--t-small); line-height: 1.45; }
   .opt__price { font: var(--display-weight) var(--t-card)/1.3 var(--font-display); font-variant-numeric: tabular-nums; grid-row: 1; grid-column: 3; }
-  .opt:has(input:checked) { border-color: var(--action); box-shadow: inset 0 0 0 1px var(--action); background: color-mix(in oklab, var(--p-accent) 5%, var(--p-bg)); }
-  .opt:has(input:focus-visible) { outline: 2px solid var(--action); outline-offset: 2px; }
+  .opt:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); background: var(--p-surface); }
+  .opt:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
   @media (hover: hover) and (pointer: fine) { .opt:hover { border-color: color-mix(in oklab, var(--p-ink) 40%, transparent); } }
   .swatches { display: flex; flex-wrap: wrap; gap: var(--s-3); }
   .swatch { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; padding: 0 var(--s-4) 0 var(--s-2);
             border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: 500 var(--t-small)/1 var(--font-text); cursor: pointer;
             transition: border-color 160ms ease; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
   .swatch__dot { width: 28px; height: 28px; border-radius: 50%; background: var(--dot); box-shadow: inset 0 0 0 1px rgb(0 0 0 / .12); }
-  .swatch[aria-pressed="true"] { border-color: var(--action); box-shadow: inset 0 0 0 1px var(--action); }
+  .swatch[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
   .order__foot { display: grid; gap: var(--s-3); }
   .concept-note { color: var(--muted); }
   #specs .rows__value { font-variant-numeric: tabular-nums; }
@@ -93,7 +124,7 @@
 </head>
 <body>
 <!-- type: product (site-kind other: a smart desk lamp, a fictional concept product)
-     deal: hero product (Aero render, side view, graphite), palette steel-orange (stone ground like a home-office wall; the orange is the warm evening light Aero turns to), type bricolage, nav nav-cards, close close-type, footer footer-dark, rhythm dark-band (specs), buttons solid, mark stack
+     deal: hero product (Aero render, side view, graphite), palette three-colour accent (paper, charcoal, electric blue on the headline words and the pre-order buttons only), type bricolage, nav nav-cards, close close-type, footer footer-dark, rhythm dark-band (specs), buttons solid, mark stack
      moments: photo-chapters in #how (the three setup steps) -->
 
 <header class="nav">
@@ -138,19 +169,17 @@
 </header>
 
 <main id="top">
-  <section class="hero hero--product" data-enter aria-labelledby="hero-h">
+  <section class="hero hero--product hero--huge" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text hero__in">
       <div class="hero__head">
         <div>
-          <h1 id="hero-h">Smart desk lamp for long days at home</h1>
+          <h1 id="hero-h">Smart desk lamp for <span class="accent-word">long days</span> at home</h1>
           <p class="hero__lead">Aero shifts from cool morning light to warm evening light on its own, timed to your sunset. From $149.</p>
         </div>
         <div class="btn-row"><a class="btn btn--primary" href="#order">Pre-order Aero<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#how">See the setup</a></div>
       </div>
-      <div class="hero__stage">
-        <div class="frame" id="aero-hero" data-product="assets/objects/product-render/specs/aero.json" data-product-place="stage" data-product-mode="image" data-product-view="side" data-product-color="graphite" aria-label="Aero in graphite, seen from the side: a round base with a dial, a slim upright and a flat light bar"></div>
-      </div>
     </div></div>
+    <img class="hero__subject" src="assets/objects/product-render/specs/stills/aero-side-graphite.webp" srcset="assets/objects/product-render/specs/stills/aero-side-graphite-half.webp 810w, assets/objects/product-render/specs/stills/aero-side-graphite.webp 1619w" sizes="(max-width: 639px) 127vw, (max-width: 1023px) 88vw, 62vw" width="1619" height="1380" fetchpriority="high" decoding="async" alt="Aero in graphite, seen from the side: its flat light bar reaches over the headline from a slim upright on a round base" data-source="render" data-subject="Aero, the product">
   </section>
 
   <section class="section" id="benefits" aria-labelledby="benefits-h">
@@ -183,17 +212,17 @@
       <div class="mo-ph__head"><h2 id="how-h">How Aero works</h2><p>Three steps and about five minutes. After that there is nothing to set.</p></div>
       <ol class="mo-ph__list">
         <li class="mo-ph__ch">
-          <figure class="mo-ph__pic"><img src="assets/img/photo-f61681627.webp" srcset="assets/img/photo-f61681627-960.webp 960w, assets/img/photo-f61681627.webp 1280w, assets/img/photo-f61681627-1920.webp 1920w" sizes="(max-width: 639px) 300vw, 100vw" loading="lazy" decoding="async" width="1280" height="871" alt="A long wooden desk with a computer and a plant against a white wall" data-source="stand-in" data-subject="a home-office desk"></figure>
+          <figure class="mo-ph__pic"><img src="assets/img/photo-f61681627.webp" srcset="assets/img/photo-f61681627-960.webp 960w, assets/img/photo-f61681627.webp 1280w, assets/img/photo-f61681627-1920.webp 1920w" sizes="(max-width: 639px) 300vw, (max-width: 1023px) 220vw, 100vw" loading="lazy" decoding="async" width="1280" height="871" alt="A long wooden desk with a computer and a plant against a white wall" data-source="stand-in" data-subject="a home-office desk"></figure>
           <h3>Put Aero on your desk</h3>
           <p>Plug in the USB-C cable. Aero starts in daylight mode straight away, with or without the app.</p>
         </li>
         <li class="mo-ph__ch">
-          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683524.webp" srcset="assets/img/photo-f61683524-960.webp 960w, assets/img/photo-f61683524.webp 1280w, assets/img/photo-f61683524-1920.webp 1920w" sizes="(max-width: 639px) 300vw, 100vw" loading="lazy" decoding="async" width="1280" height="1024" alt="A phone standing in a dock on a black and white desk beside headphones" data-source="stand-in" data-subject="a phone on a desk"></figure>
+          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683524.webp" srcset="assets/img/photo-f61683524-960.webp 960w, assets/img/photo-f61683524.webp 1280w, assets/img/photo-f61683524-1920.webp 1920w" sizes="(max-width: 639px) 300vw, (max-width: 1023px) 220vw, 100vw" loading="lazy" decoding="async" width="1280" height="1024" alt="A phone standing in a dock on a black and white desk beside headphones" data-source="stand-in" data-subject="a phone on a desk"></figure>
           <h3>Pair Aero with the app</h3>
           <p>Open the Aero app on iOS or Android and tap the lamp. It reads your location once for local sunrise and sunset.</p>
         </li>
         <li class="mo-ph__ch">
-          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683702.webp" srcset="assets/img/photo-f61683702-960.webp 960w, assets/img/photo-f61683702.webp 1280w, assets/img/photo-f61683702-1920.webp 1920w" sizes="(max-width: 639px) 300vw, 100vw" loading="lazy" decoding="async" width="1280" height="853" alt="A desk by a window in the evening, the room going dark" data-source="stand-in" data-subject="a desk in the evening"></figure>
+          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683702.webp" srcset="assets/img/photo-f61683702-960.webp 960w, assets/img/photo-f61683702.webp 1280w, assets/img/photo-f61683702-1920.webp 1920w" sizes="(max-width: 639px) 300vw, (max-width: 1023px) 220vw, 100vw" loading="lazy" decoding="async" width="1280" height="853" alt="A desk by a window in the evening, the room going dark" data-source="stand-in" data-subject="a desk in the evening"></figure>
           <h3>Aero follows the day</h3>
           <p>Aero shifts colour and brightness every few minutes. Change anything on the dial and it returns to the schedule the next morning.</p>
         </li>
@@ -266,18 +295,18 @@
           <fieldset>
             <legend>Colour</legend>
             <div class="swatches">
-              <button class="swatch" type="button" data-product-swatch="#aero-order" value="ember" aria-pressed="true" style="--dot: #c2501b"><span class="swatch__dot" aria-hidden="true"></span>Ember</button>
-              <button class="swatch" type="button" data-product-swatch="#aero-order" value="graphite" aria-pressed="false" style="--dot: #2b2c2f"><span class="swatch__dot" aria-hidden="true"></span>Graphite</button>
+              <button class="swatch" type="button" data-product-swatch="#aero-order" value="ember" aria-pressed="false" style="--dot: #c2501b"><span class="swatch__dot" aria-hidden="true"></span>Ember</button>
+              <button class="swatch" type="button" data-product-swatch="#aero-order" value="graphite" aria-pressed="true" style="--dot: #2b2c2f"><span class="swatch__dot" aria-hidden="true"></span>Graphite</button>
               <button class="swatch" type="button" data-product-swatch="#aero-order" value="chalk" aria-pressed="false" style="--dot: #dcd9d2"><span class="swatch__dot" aria-hidden="true"></span>Chalk</button>
             </div>
-            <input type="hidden" name="colour" value="Ember" data-colour-field>
+            <input type="hidden" name="colour" value="Graphite" data-colour-field>
           </fieldset>
           <div class="order__foot">
             <div class="btn-row"><button class="btn btn--primary" type="submit">Pre-order Aero<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button></div>
             <p class="t-small">Sends us your choice by email. We confirm within a day and charge nothing until your lamp ships.</p>
           </div>
         </form>
-        <div class="frame order-frame span-6 start-7" id="aero-order" data-product="assets/objects/product-render/specs/aero.json" data-product-place="tile" data-product-mode="image" data-product-view="three-quarter" data-product-color="ember" aria-label="Aero in the chosen colour, three-quarter view"></div>
+        <div class="frame order-frame span-6 start-7" id="aero-order" data-product="assets/objects/product-render/specs/aero.json" data-product-place="tile" data-product-mode="image" data-product-view="three-quarter" data-product-color="graphite" aria-label="Aero in the chosen colour, three-quarter view"></div>
       </div>
     </div>
   </section>

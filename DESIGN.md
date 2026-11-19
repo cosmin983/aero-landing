@@ -2,18 +2,12 @@
 name: Aero
 description: Landing page for Aero, a smart desk lamp that follows the time of day
 colors:
-  ground: "#eeeeeb"
-  surface: "#e1e1dd"
-  ink: "#1c1d1f"
-  muted: "#5c5e62"
-  ember: "#c2501b"
-  ember-ink: "#ffffff"
-  inverse-ground: "#1c1d1f"
-  inverse-surface: "#28292b"
-  inverse-ink: "#eeeeeb"
-  inverse-muted: "#969796"
+  paper: "#edeae4"
+  charcoal: "#1c1c1e"
+  blue: "#2b4fe8"
   lamp-graphite: "#2b2c2f"
   lamp-chalk: "#dcd9d2"
+  lamp-ember: "#c2501b"
 typography:
   display:
     fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
@@ -55,25 +49,25 @@ spacing:
   xl: "96px"
 components:
   button-primary:
-    backgroundColor: "{colors.ember}"
-    textColor: "{colors.ember-ink}"
+    backgroundColor: "{colors.blue}"
+    textColor: "{colors.paper}"
     rounded: "{rounded.sm}"
     padding: "0 24px"
     height: "44px"
   button-secondary:
-    backgroundColor: "{colors.ground}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.charcoal}"
     rounded: "{rounded.sm}"
     padding: "0 24px"
     height: "44px"
   order-option:
-    backgroundColor: "{colors.ground}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.charcoal}"
     rounded: "{rounded.md}"
     padding: "16px 24px"
   colour-swatch:
-    backgroundColor: "{colors.ground}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.charcoal}"
     rounded: "{rounded.pill}"
     height: "44px"
 ---
@@ -82,14 +76,16 @@ components:
 
 ## Overview
 
-A calm, product-first landing page. Stone ground, near-black ink, and one ember accent that stands for the warm evening light Aero turns to. Every section shows the lamp or a desk it lives on, one section per screen at 1440x900.
+A three-colour accent page: warm paper, charcoal and one electric blue. The lamp is huge in the hero, mirrored so its light bar reaches over the headline, bleeding off the right and bottom edges. Every ground carries a paper grain instead of a flat fill.
 
 ## Colors
 
-- 90 to 95% neutral: `ground`, `surface`, `ink`, `muted`.
-- `ember` is the only accent: the primary button, the focus ring, the selected order option and the Ember colourway. Never as a background band.
-- One dark band (`inverse-*`): the Specifications section, plus the footer.
-- Lamp colourways: Graphite (`lamp-graphite`), Chalk (`lamp-chalk`), Ember (`ember`).
+- Exactly three page colours: `paper` (background), `charcoal` (text), `blue` (accent, hue 228°; the warm ground and photographs sit near 25°, so the gap is about 203°).
+- Blue appears on two things only: the words "long days" in the hero headline, and the primary "Pre-order Aero" buttons. Focus rings, the logo mark, selected options, swatches and hover states use charcoal.
+- Paper on blue is 5.15:1 (button labels); blue on paper is 5.15:1 (the headline words).
+- Dark bands (Specifications, footer) swap the neutrals: charcoal ground, paper text.
+- Lamp colourways (`lamp-*`) are the product's own colours, not page accents; the order card defaults to Graphite.
+- Texture: an SVG fractal-noise grain (neutral grey with alpha) as `--grain` on the body, nav, every section and the footer.
 
 ## Typography
 
@@ -117,5 +113,5 @@ Radius family "soft": 8px controls, 12px panels and options, 20px cards and phot
 ## Do's and Don'ts
 
 - Do show the lamp itself big; context photographs are CC0 stand-ins (see `credits.html`).
-- Don't add a second accent colour, gradients, or glass effects.
+- Don't add a second accent colour, gradients, glass effects or flat untextured grounds.
 - Don't present the specs, prices or quotes as real: Aero is a concept product, and the footer says so.

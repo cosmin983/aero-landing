@@ -1,9 +1,9 @@
 {
  "id": "aero",
- "made": "2026-11-19T16:39:44.100Z",
- "px": 1100,
+ "made": "2026-11-19T17:50:51.113Z",
+ "px": 1600,
  "grounds": [
-  "dark"
+  "light"
  ],
  "colors": [
   "graphite",
@@ -60,30 +60,30 @@
      "graphite": {
       "file": "stills/aero-side-graphite.webp",
       "half": "stills/aero-side-graphite-half.webp",
-      "w": 1117,
-      "h": 953
+      "w": 1619,
+      "h": 1380
      },
      "chalk": {
       "file": "stills/aero-side-chalk.webp",
       "half": "stills/aero-side-chalk-half.webp",
-      "w": 1117,
-      "h": 953
+      "w": 1619,
+      "h": 1380
      },
      "ember": {
       "file": "stills/aero-side-ember.webp",
       "half": "stills/aero-side-ember-half.webp",
-      "w": 1117,
-      "h": 953
+      "w": 1619,
+      "h": 1380
      }
     }
    },
    "box": [
-    0.0054,
-    0.0063,
-    0.9946,
-    0.9601
+    0.0037,
+    0.0043,
+    0.9963,
+    0.9623
    ],
-   "px": 1100
+   "px": 1600
   },
   "detail-head": {
    "view": "detail-head",
