@@ -83,8 +83,9 @@
       });
       if (head) tl.from(head, { autoAlpha: 0, y: 16, duration: 0.6 }, 0);
       if (items.length) {
+        // the floating lamps only fade in: their y belongs to the float below
         tl.from(items, {
-          autoAlpha: 0, y: 12, duration: 0.55,
+          autoAlpha: 0, y: (i, el) => (el.matches('#aero-spec, #aero-order') ? 0 : 12), duration: 0.55,
           stagger: { each: 0.07, ease: 'power1.in' },
         }, head ? 0.08 : 0);
       }
@@ -101,11 +102,12 @@
       if (head) gsap.to(head, { y: -70, autoAlpha: 0.15, ease: 'none', scrollTrigger: { ...out, end: '80% top' } });
     }
 
-    // the spec and order lamps drift a little slower than the page
+    // the spec and order lamps hold still until the whole lamp is on screen, then float up a little,
+    // slowly, over most of a screen of scrolling (scrub 1.5 adds a soft lag behind the scroll)
     document.querySelectorAll('#aero-spec, #aero-order').forEach((frame) => {
-      gsap.fromTo(frame, { y: 36 }, {
-        y: -36, ease: 'none',
-        scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true },
+      gsap.to(frame, {
+        y: -24, ease: 'sine.inOut',
+        scrollTrigger: { trigger: frame, start: 'bottom bottom', end: () => '+=' + Math.round(window.innerHeight * 0.8), scrub: 1.5, invalidateOnRefresh: true },
       });
     });
 

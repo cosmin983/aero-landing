@@ -81,6 +81,9 @@
   #benefits .panel--render { background: var(--g-alt); }
   #benefits .panel--render > .frame { position: absolute; inset: 0; }
   #specs .spec-frame { aspect-ratio: 5 / 4; }
+  /* room under the last spec row before the light section: grow past one screen rather than cramp */
+  #specs { height: auto; min-height: 100svh; padding-bottom: calc(120px + var(--bar, 0px)); }
+  #specs .rows > li { padding-block: var(--s-3); }
   #order .order-frame { aspect-ratio: 5 / 4; }
   /* the order card: one fieldset of options, one of colours */
   .order { display: grid; gap: var(--s-6); }
@@ -123,6 +126,7 @@
     .opt { padding: var(--s-4); }
     .step { grid-template-columns: 120px minmax(0, 1fr); gap: var(--s-4); }
     #how .steps { margin-top: var(--s-5); }
+    #specs { padding-bottom: calc(96px + var(--bar, 0px)); }
     #specs .rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-4); }
     #specs .rows > li, #specs .rows > li:first-child { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); padding-block: var(--s-3); }
     #specs .rows__value { grid-column: 1; text-align: left; justify-self: start; max-width: none; }
