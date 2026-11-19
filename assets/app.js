@@ -24,13 +24,9 @@
     lerp: 0.085,
     wheelMultiplier: 0.95,
     smoothWheel: true,
-    anchors: { offset: 0, duration: 1.3, easing: easeOutExpo },
     stopInertiaOnNavigate: true,
   });
   lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
-  window.__lenis = lenis;
 
   // the phone menu is a full-screen sheet: hold the page still behind it
   const toggle = document.querySelector('.nav__toggle');
@@ -39,6 +35,38 @@
       toggle.getAttribute('aria-expanded') === 'true' ? lenis.stop() : lenis.start();
     }).observe(toggle, { attributes: true, attributeFilter: ['aria-expanded'] });
   }
+
+  // in-page links: a short trip glides all the way; a long one cuts to half a screen before the
+  // target and glides only that last stretch, so the page never races past the sections between
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const hash = link.getAttribute('href');
+    const target = hash.length > 1 && document.querySelector(hash);
+    if (!target) return;
+    e.preventDefault();
+    const go = () => {
+      lenis.start();
+      const top = Math.round(target.getBoundingClientRect().top + window.scrollY);
+      const dist = top - window.scrollY;
+      const vh = window.innerHeight;
+      if (reduce.matches) lenis.scrollTo(top, { immediate: true, force: true });
+      else {
+        if (Math.abs(dist) > 1.2 * vh) lenis.scrollTo(top - Math.sign(dist) * 0.5 * vh, { immediate: true, force: true });
+        lenis.scrollTo(top, { duration: 0.9, easing: easeOutExpo, force: true });
+      }
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    };
+    // from the phone menu: let the sheet close and the page settle first, then travel
+    if (toggle && toggle.getAttribute('aria-expanded') === 'true') setTimeout(go, 80);
+    else go();
+  });
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  window.__lenis = lenis;
+
 
   const ease = 'power3.out';
   const mm = gsap.matchMedia();

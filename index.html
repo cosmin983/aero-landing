@@ -46,10 +46,6 @@
 }
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
-<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
-<link rel="modulepreload" href="assets/moments/moments.js">
-<link rel="modulepreload" href="assets/moments/lib.js">
-<link rel="modulepreload" href="assets/moments/photo-chapters/moment.js">
 <!-- page CSS: only what sits inside a visual or the order card, and one --p-h per card group -->
 <style>
   ::selection { background: color-mix(in oklab, var(--charcoal) 16%, transparent); color: inherit; }
@@ -110,12 +106,23 @@
   .concept-note { color: var(--muted); }
   #specs .rows__value { font-variant-numeric: tabular-nums; }
   .faq-frame { aspect-ratio: 4 / 3; margin-top: var(--s-5); }
+  /* how it works: three steps, each a picture beside its words, closed by a hairline */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; }
+  .step { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--s-5); align-items: start; padding-block: var(--s-5); border-bottom: 1px solid var(--line); }
+  .step:first-child { padding-top: 0; }
+  .step__pic { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r-md); }
+  .step__text { display: grid; gap: var(--s-2); }
+  .step__num { font: 500 var(--t-label)/1.3 var(--font-text); color: var(--muted); margin: 0; }
+  .step h3 { font: 500 var(--t-card)/1.3 var(--font-text); margin: 0; }
+  .step__text > p:last-child { margin: 0; }
   .quotes { display: grid; gap: var(--s-7); align-content: start; }
   .quotes .quote { display: grid; gap: var(--s-3); }
   .quotes figcaption { color: var(--muted); }
   @media (max-width: 639px) {
     #benefits .panel { --p-h: 220px; }
     .opt { padding: var(--s-4); }
+    .step { grid-template-columns: 120px minmax(0, 1fr); gap: var(--s-4); }
+    #how .steps { margin-top: var(--s-5); }
     #specs .rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-4); }
     #specs .rows > li, #specs .rows > li:first-child { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); padding-block: var(--s-3); }
     #specs .rows__value { grid-column: 1; text-align: left; justify-self: start; max-width: none; }
@@ -125,7 +132,7 @@
 <body>
 <!-- type: product (site-kind other: a smart desk lamp, a fictional concept product)
      deal: hero product (Aero render, side view, graphite), palette three-colour accent (paper, charcoal, electric blue on the headline words and the pre-order buttons only), type bricolage, nav nav-cards, close close-type, footer footer-dark, rhythm dark-band (specs), buttons solid, mark stack
-     moments: photo-chapters in #how (the three setup steps) -->
+     moments: none (the pinned photo-chapters moment was removed at the user's request: it held the scroll) -->
 
 <header class="nav">
   <div class="wrap nav__bar">
@@ -207,26 +214,40 @@
     </div>
   </section>
 
-  <section class="section" id="how" data-moment="photo-chapters" aria-labelledby="how-h">
-    <div class="wrap mo-ph">
-      <div class="mo-ph__head"><h2 id="how-h">How Aero works</h2><p>Three steps and about five minutes. After that there is nothing to set.</p></div>
-      <ol class="mo-ph__list">
-        <li class="mo-ph__ch">
-          <figure class="mo-ph__pic"><img src="assets/img/photo-f61681627.webp" srcset="assets/img/photo-f61681627-960.webp 960w, assets/img/photo-f61681627.webp 1280w, assets/img/photo-f61681627-1920.webp 1920w" sizes="(max-width: 639px) 300vw, (max-width: 1023px) 220vw, 100vw" loading="lazy" decoding="async" width="1280" height="871" alt="A long wooden desk with a computer and a plant against a white wall" data-source="stand-in" data-subject="a home-office desk"></figure>
-          <h3>Put Aero on your desk</h3>
-          <p>Plug in the USB-C cable. Aero starts in daylight mode straight away, with or without the app.</p>
-        </li>
-        <li class="mo-ph__ch">
-          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683524.webp" srcset="assets/img/photo-f61683524-960.webp 960w, assets/img/photo-f61683524.webp 1280w, assets/img/photo-f61683524-1920.webp 1920w" sizes="(max-width: 639px) 300vw, (max-width: 1023px) 220vw, 100vw" loading="lazy" decoding="async" width="1280" height="1024" alt="A phone standing in a dock on a black and white desk beside headphones" data-source="stand-in" data-subject="a phone on a desk"></figure>
-          <h3>Pair Aero with the app</h3>
-          <p>Open the Aero app on iOS or Android and tap the lamp. It reads your location once for local sunrise and sunset.</p>
-        </li>
-        <li class="mo-ph__ch">
-          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683702.webp" srcset="assets/img/photo-f61683702-960.webp 960w, assets/img/photo-f61683702.webp 1280w, assets/img/photo-f61683702-1920.webp 1920w" sizes="(max-width: 639px) 300vw, (max-width: 1023px) 220vw, 100vw" loading="lazy" decoding="async" width="1280" height="853" alt="A desk by a window in the evening, the room going dark" data-source="stand-in" data-subject="a desk in the evening"></figure>
-          <h3>Aero follows the day</h3>
-          <p>Aero shifts colour and brightness every few minutes. Change anything on the dial and it returns to the schedule the next morning.</p>
-        </li>
-      </ol>
+  <section class="section" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-4" data-reveal>
+          <h2 id="how-h">How Aero works</h2>
+          <p class="t-lead">Three steps and about five minutes. After that there is nothing to set.</p>
+        </div>
+        <ol class="steps span-6 start-7" data-reveal-group>
+          <li class="step">
+            <img class="step__pic" src="assets/img/photo-f61681627-500.webp" srcset="assets/img/photo-f61681627-500.webp 500w, assets/img/photo-f61681627-960.webp 960w" sizes="(max-width: 639px) 120px, 240px" width="500" height="340" alt="A long wooden desk with a computer and a plant against a white wall" loading="lazy" decoding="async" data-source="stand-in" data-subject="a home-office desk">
+            <div class="step__text">
+              <p class="step__num">Step 1</p>
+              <h3>Put Aero on your desk</h3>
+              <p>Plug in the USB-C cable. Aero starts in daylight mode straight away, with or without the app.</p>
+            </div>
+          </li>
+          <li class="step">
+            <img class="step__pic" src="assets/img/photo-f61683524-500.webp" srcset="assets/img/photo-f61683524-500.webp 500w, assets/img/photo-f61683524-960.webp 960w" sizes="(max-width: 639px) 120px, 240px" width="500" height="340" alt="A phone standing in a dock on a black and white desk beside headphones" loading="lazy" decoding="async" data-source="stand-in" data-subject="a home-office desk">
+            <div class="step__text">
+              <p class="step__num">Step 2</p>
+              <h3>Pair Aero with the app</h3>
+              <p>Open the Aero app on iOS or Android and tap the lamp. It reads your location once for local sunrise and sunset.</p>
+            </div>
+          </li>
+          <li class="step">
+            <img class="step__pic" src="assets/img/photo-f61683702-500.webp" srcset="assets/img/photo-f61683702-500.webp 500w, assets/img/photo-f61683702-960.webp 960w" sizes="(max-width: 639px) 120px, 240px" width="500" height="340" alt="A desk by a window in the evening, the room going dark" loading="lazy" decoding="async" data-source="stand-in" data-subject="a home-office desk">
+            <div class="step__text">
+              <p class="step__num">Step 3</p>
+              <h3>Aero follows the day</h3>
+              <p>Aero shifts colour and brightness every few minutes. Change anything on the dial and it returns to the schedule the next morning.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </div>
   </section>
 
