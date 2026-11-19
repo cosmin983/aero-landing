@@ -1,6 +1,6 @@
 {
  "id": "aero",
- "made": "2026-11-19T17:50:51.113Z",
+ "made": "2026-11-19T19:51:12.956Z",
  "px": 1600,
  "grounds": [
   "light"
@@ -195,30 +195,30 @@
      "graphite": {
       "file": "stills/aero-three-quarter-desk-graphite.webp",
       "half": "stills/aero-three-quarter-desk-graphite-half.webp",
-      "w": 1124,
-      "h": 705
+      "w": 1628,
+      "h": 1020
      },
      "chalk": {
       "file": "stills/aero-three-quarter-desk-chalk.webp",
       "half": "stills/aero-three-quarter-desk-chalk-half.webp",
-      "w": 1124,
-      "h": 705
+      "w": 1628,
+      "h": 1020
      },
      "ember": {
       "file": "stills/aero-three-quarter-desk-ember.webp",
       "half": "stills/aero-three-quarter-desk-ember-half.webp",
-      "w": 1124,
-      "h": 705
+      "w": 1628,
+      "h": 1020
      }
     }
    },
    "box": [
-    0.0053,
-    0.0085,
-    0.9849,
-    0.9901
+    0.0037,
+    0.0059,
+    0.9865,
+    0.9941
    ],
-   "px": 1100
+   "px": 1600
   }
  }
 }

@@ -45,7 +45,7 @@
   --display-stretch: 96%;
 }
 </style>
-<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>(function(){var d=document.documentElement;try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('aero-lit')){d.classList.add('lights-pending');sessionStorage.setItem('aero-lit','1');setTimeout(function(){d.classList.remove('lights-pending')},2600)}}catch(e){}})()</script>
 <!-- page CSS: only what sits inside a visual or the order card, and one --p-h per card group -->
 <style>
   ::selection { background: color-mix(in oklab, var(--charcoal) 16%, transparent); color: inherit; }
@@ -109,6 +109,33 @@
   .concept-note { color: var(--muted); }
   #specs .rows__value { font-variant-numeric: tabular-nums; }
   .faq-frame { aspect-ratio: 4 / 3; margin-top: var(--s-5); }
+  /* lights on: the page opens dim once per session and Aero switches it on (app.js fades the layer) */
+  .lights { position: fixed; inset: 0; z-index: 1000; background: var(--charcoal); pointer-events: none; opacity: 0; visibility: hidden; }
+  .lights-pending .lights { opacity: .94; visibility: visible; }
+  /* the lamp's light follows the pointer over the hero: a soft pool on the paper (fine pointers only) */
+  .hero__glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 600ms ease;
+                background: radial-gradient(560px circle at var(--gx, 70%) var(--gy, 25%), rgb(255 253 248 / .85), rgb(255 253 248 / 0) 62%); }
+  .hero--huge.is-lit .hero__glow { opacity: 1; }
+  .hero--huge { background-color: color-mix(in oklab, var(--paper) 97%, var(--charcoal)); }
+  /* masked line reveals (SplitText adds the line masks) */
+  .split-mask { overflow: clip; padding-bottom: .06em; margin-bottom: -.06em; }
+  /* a day with Aero: the readout runs with the scroll, the room warms */
+  .day__copy { display: grid; gap: var(--s-6); align-content: start; }
+  .day__copy .section-head { margin: 0; }
+  .day__readout { display: grid; gap: var(--s-3); }
+  .day__time { margin: 0; font: var(--display-weight) clamp(72px, 10.5vw, 164px)/.9 var(--font-display); letter-spacing: -0.04em;
+               font-variant-numeric: tabular-nums; font-stretch: var(--display-stretch); }
+  .day__k { margin: 0; display: flex; align-items: center; gap: var(--s-3); font: 500 var(--t-lead)/1.2 var(--font-text); font-variant-numeric: tabular-nums; }
+  .day__dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: .5; }
+  .day__bar { position: relative; height: 2px; background: color-mix(in oklab, var(--ink) 18%, transparent); margin-top: var(--s-3); }
+  .day__marker { position: absolute; top: 50%; left: 0; width: 12px; height: 12px; margin: -6px 0 0 0; border-radius: 50%; background: var(--ink); }
+  .day__hours { display: flex; justify-content: space-between; color: var(--muted); font-size: var(--t-label); font-variant-numeric: tabular-nums; }
+  .day__lead { margin: 0; max-width: 40ch; }
+  .day__scene { position: relative; overflow: hidden; border-radius: var(--r-lg); background: var(--p-surface); aspect-ratio: 1628 / 1020; isolation: isolate; }
+  .day__scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .day__tint { position: absolute; inset: 0; mix-blend-mode: multiply; background: #dfe7fb; opacity: .55; pointer-events: none; }
+  /* specs: the dark band opens from an inset card to full width (app.js scrubs the clip) */
+  #specs { will-change: clip-path; }
   /* how it works: a track of three steps joined by a line that draws once, left to right */
   #how { height: auto; min-height: 100svh; }
   .track { --node: 40px; list-style: none; margin: 0; padding: 0; position: relative;
@@ -143,18 +170,33 @@
   .quotes { display: grid; gap: var(--s-7); align-content: start; }
   .quotes .quote { display: grid; gap: var(--s-3); }
   .quotes figcaption { color: var(--muted); }
-  @media (max-width: 639px) {
-    #benefits .panel { --p-h: 220px; }
-    .opt { padding: var(--s-4); }
+  /* phones and tablets: the track runs down the left, one line segment from each node to the next */
+  @media (max-width: 1023px) {
     .track { --node: 32px; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); padding-left: calc(var(--node) + var(--s-4)); }
     .track::before { display: none; }
-    /* on a phone the line runs down the left, one segment from each node to the next, stopping at the last */
     .track__step:not(:last-child)::after { content: ""; position: absolute; left: calc(-1 * (var(--node) / 2 + var(--s-4))); top: var(--node);
       bottom: calc(-1 * var(--s-7)); width: 1px; background: var(--ink); transform-origin: center top; transform: scaleY(var(--line, 1)); }
     .track__pic--app { aspect-ratio: auto; padding: var(--s-5) 0; }
     .track__step { gap: var(--s-4); }
     .track__node { position: absolute; left: calc(-1 * (var(--node) + var(--s-4))); top: 0; }
+  }
+  /* tablets: each step's words beside its picture */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .track__step { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); grid-template-rows: auto; align-items: start; column-gap: var(--s-5); }
+  }
+  /* phones and tablets: the picture sits between the heading and the clock, so both are on screen while the day runs */
+  @media (max-width: 1023px) {
+    #day .grid { display: flex; flex-direction: column; gap: var(--s-6); }
+    #day .day__copy { display: contents; }
+    #how { min-height: 0; }
+    #day .section-head { order: 1; } #day .day__scene { order: 2; width: 100%; } #day .day__readout { order: 3; } #day .day__lead { order: 4; }
+  }
+  @media (max-width: 639px) {
+    #benefits .panel { --p-h: 220px; }
+    .opt { padding: var(--s-4); }
+
     #specs { padding-bottom: calc(96px + var(--bar, 0px)); }
+    #day { height: auto; min-height: 100svh; }
     #specs .rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-4); }
     #specs .rows > li, #specs .rows > li:first-child { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); padding-block: var(--s-3); }
     #specs .rows__value { grid-column: 1; text-align: left; justify-self: start; max-width: none; }
@@ -162,6 +204,7 @@
 </style>
 </head>
 <body>
+<div class="lights" aria-hidden="true"></div>
 <!-- type: product (site-kind other: a smart desk lamp, a fictional concept product)
      deal: hero product (Aero render, side view, graphite), palette three-colour accent (paper, charcoal, electric blue on the headline words and the pre-order buttons only), type bricolage, nav nav-cards, close close-type, footer footer-dark, rhythm dark-band (specs), buttons solid, mark stack
      moments: none (the pinned photo-chapters moment was removed at the user's request: it held the scroll) -->
@@ -208,7 +251,7 @@
 </header>
 
 <main id="top">
-  <section class="hero hero--product hero--huge" data-enter aria-labelledby="hero-h">
+  <section class="hero hero--product hero--huge" aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text hero__in">
       <div class="hero__head">
         <div>
@@ -218,6 +261,7 @@
         <div class="btn-row"><a class="btn btn--primary" href="#order">Pre-order Aero<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#how">See the setup</a></div>
       </div>
     </div></div>
+    <div class="hero__glow" aria-hidden="true"></div>
     <img class="hero__subject" src="assets/objects/product-render/specs/stills/aero-side-graphite.webp" srcset="assets/objects/product-render/specs/stills/aero-side-graphite-half.webp 810w, assets/objects/product-render/specs/stills/aero-side-graphite.webp 1619w" sizes="(max-width: 639px) 127vw, (max-width: 1023px) 88vw, 62vw" width="1619" height="1380" fetchpriority="high" decoding="async" alt="Aero in graphite, seen from the side: its flat light bar reaches over the headline from a slim upright on a round base" data-source="render" data-subject="Aero, the product">
   </section>
 
@@ -246,6 +290,29 @@
     </div>
   </section>
 
+  <section class="section day" id="day" aria-labelledby="day-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 day__copy">
+          <div class="section-head" data-reveal>
+            <h2 id="day-h">A day with Aero. <span class="muted">Scroll through it.</span></h2>
+          </div>
+          <div class="day__readout" aria-hidden="true">
+            <p class="day__time" data-day-time>07:00</p>
+            <p class="day__k"><span data-day-k>6,500</span> K <span class="day__dot"></span> <span data-day-mode>Daylight</span></p>
+            <div class="day__bar"><span class="day__marker" data-day-marker></span></div>
+            <div class="day__hours"><span>07:00</span><span>14:00</span><span>21:30</span></div>
+          </div>
+          <p class="day__lead">From 6,500 K at sunrise to 2,700 K by night, Aero follows the sun, so the light on your desk never fights the room around it.</p>
+        </div>
+        <div class="day__scene span-6 start-7">
+          <img src="assets/objects/product-render/specs/stills/aero-three-quarter-desk-graphite.webp" srcset="assets/objects/product-render/specs/stills/aero-three-quarter-desk-graphite-half.webp 814w, assets/objects/product-render/specs/stills/aero-three-quarter-desk-graphite.webp 1628w" sizes="(max-width: 1023px) 100vw, 46vw" width="1628" height="1020" alt="Aero in graphite lighting a desk with a sheet of paper, two books and a mug" loading="lazy" decoding="async" data-source="render" data-subject="Aero, the product">
+          <span class="day__tint" data-day-tint aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="how" aria-labelledby="how-h">
     <div class="wrap">
       <div class="section-head how__head" data-reveal>
@@ -258,7 +325,7 @@
             <h3>Put Aero on your desk</h3>
             <p>Plug in the USB-C cable. Aero starts in daylight mode straight away, with or without the app.</p>
           </div>
-          <div class="track__pic"><img src="assets/img/photo-f61681627-960.webp" srcset="assets/img/photo-f61681627-500.webp 500w, assets/img/photo-f61681627-960.webp 960w" sizes="(max-width: 639px) 80vw, 33vw" width="960" height="653" alt="A long wooden desk with a computer and a plant against a white wall" loading="lazy" decoding="async" data-source="stand-in" data-subject="a home-office desk"></div>
+          <div class="track__pic"><img src="assets/img/photo-f61681627-960.webp" srcset="assets/img/photo-f61681627-500.webp 500w, assets/img/photo-f61681627-960.webp 960w, assets/img/photo-f61681627.webp 1280w" sizes="(max-width: 639px) 85vw, (max-width: 1023px) 50vw, 33vw" width="960" height="653" alt="A long wooden desk with a computer and a plant against a white wall" loading="lazy" decoding="async" data-source="stand-in" data-subject="a home-office desk"></div>
         </li>
         <li class="track__step">
           <span class="track__node" aria-hidden="true">2</span>
@@ -431,6 +498,7 @@
 <script type="module" src="assets/objects/product-render/auto.js"></script>
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/SplitText.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
 <script src="assets/app.js" defer></script>
 </body>

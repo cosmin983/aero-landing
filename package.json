@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Aero smart desk lamp landing page (static site)",
   "scripts": {
-    "vendor": "mkdir -p assets/vendor && cp node_modules/gsap/dist/gsap.min.js node_modules/gsap/dist/ScrollTrigger.min.js node_modules/lenis/dist/lenis.min.js node_modules/lenis/dist/lenis.css assets/vendor/"
+    "vendor": "mkdir -p assets/vendor && cp node_modules/gsap/dist/gsap.min.js node_modules/gsap/dist/ScrollTrigger.min.js node_modules/gsap/dist/SplitText.min.js node_modules/lenis/dist/lenis.min.js node_modules/lenis/dist/lenis.css assets/vendor/"
   },
   "keywords": [],
   "author": "",
