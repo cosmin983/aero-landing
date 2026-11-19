@@ -102,14 +102,43 @@
       if (head) gsap.to(head, { y: -70, autoAlpha: 0.15, ease: 'none', scrollTrigger: { ...out, end: '80% top' } });
     }
 
-    // the spec and order lamps hold still until the whole lamp is on screen, then float up a little,
-    // slowly, over most of a screen of scrolling (scrub 1.5 adds a soft lag behind the scroll)
+    // the spec and order lamps bob gently up and down (16px, 2.6s each way) while the whole lamp is
+    // on screen; off screen the bob pauses where it is
     document.querySelectorAll('#aero-spec, #aero-order').forEach((frame) => {
-      gsap.to(frame, {
-        y: -24, ease: 'sine.inOut',
-        scrollTrigger: { trigger: frame, start: 'bottom bottom', end: () => '+=' + Math.round(window.innerHeight * 0.8), scrub: 1.5, invalidateOnRefresh: true },
+      const bob = gsap.to(frame, { y: -16, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true });
+      ScrollTrigger.create({
+        trigger: frame, start: 'bottom bottom', end: 'top top',
+        onToggle: (self) => (self.isActive ? bob.play() : bob.pause()),
       });
     });
+
+    // how it works: the line draws left to right (top to bottom on a phone), each step arrives as the
+    // line reaches it, then the app's time marker walks the day once, morning to evening
+    const track = document.querySelector('[data-track]');
+    if (track) {
+      const steps = Array.from(track.querySelectorAll('.track__step'));
+      const marker = track.querySelector('[data-app-marker]');
+      const rows = Array.from(track.querySelectorAll('[data-app-row]'));
+      const tl = gsap.timeline({ scrollTrigger: { trigger: track, start: 'top 80%', once: true } });
+      tl.fromTo(track, { '--line': 0 }, { '--line': 1, duration: 0.9, ease: 'power2.inOut' }, 0.15);
+      steps.forEach((step, i) => {
+        const at = 0.15 + i * 0.36; // the line's arrival at each node
+        tl.from(step.querySelector('.track__node'), { autoAlpha: 0, scale: 0.9, duration: 0.35, ease }, at);
+        tl.from([step.querySelector('.track__body'), step.querySelector('.track__pic')],
+          { autoAlpha: 0, y: 12, duration: 0.5, ease, stagger: 0.06 }, at + 0.06);
+      });
+      if (marker) {
+        const bar = marker.parentElement;
+        const light = (p) => rows.forEach((r, i) => r.classList.toggle('is-dim', i !== (p < 0.34 ? 0 : p < 0.7 ? 1 : 2)));
+        tl.set(marker, { left: '8%' }, 0);
+        tl.call(() => light(0), null, 0);
+        tl.to(marker, {
+          x: () => bar.offsetWidth * 0.64, duration: 1.6, ease: 'power2.inOut',
+          onUpdate() { light(this.progress()); },
+          onComplete() { rows.forEach((r) => r.classList.remove('is-dim')); },
+        }, 0.15 + 0.36 + 0.6);
+      }
+    }
 
     // the benefit pictures settle from a slight zoom as they come into view
     document.querySelectorAll('#benefits .panel').forEach((panel) => {
