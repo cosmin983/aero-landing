@@ -1,6 +1,6 @@
-/* Aero page script: smooth scroll (Lenis) synced with GSAP ScrollTrigger, one quiet reveal per
-   section as it enters, and the order form's colour field. Everything is visible without this file;
-   under prefers-reduced-motion nothing moves (Lenis turns its smoothing off on its own). */
+/* Aero page script: Lenis smooth scroll synced with GSAP ScrollTrigger, one reveal per section,
+   a few scroll-linked depth moves, and the order form's colour field. Everything is visible without
+   this file; under prefers-reduced-motion nothing moves (Lenis turns its smoothing off on its own). */
 (() => {
   const { gsap, ScrollTrigger, Lenis } = window;
 
@@ -14,17 +14,36 @@
   if (!gsap || !ScrollTrigger || !Lenis) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  // Lenis on native scroll, driven by GSAP's ticker so ScrollTrigger and the photo-chapters moment stay in step
-  const lenis = new Lenis({ anchors: true, stopInertiaOnNavigate: true });
+  // a strong ease-out: fast start, long soft landing (close to cubic-bezier(0.23, 1, 0.32, 1))
+  const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+  // Lenis on native scroll. A lower lerp gives the wheel a longer, softer glide; touch stays native.
+  // Anchor links glide to their section with the same ease. GSAP's ticker drives it, so
+  // ScrollTrigger and the photo-chapters moment read the same position every frame.
+  const lenis = new Lenis({
+    lerp: 0.085,
+    wheelMultiplier: 0.95,
+    smoothWheel: true,
+    anchors: { offset: 0, duration: 1.3, easing: easeOutExpo },
+    stopInertiaOnNavigate: true,
+  });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
   window.__lenis = lenis;
 
-  // one entrance per section: the heading leads, its group follows with a short, uneven stagger
-  const ease = 'power3.out'; // close to cubic-bezier(0.23, 1, 0.32, 1)
+  // the phone menu is a full-screen sheet: hold the page still behind it
+  const toggle = document.querySelector('.nav__toggle');
+  if (toggle) {
+    new MutationObserver(() => {
+      toggle.getAttribute('aria-expanded') === 'true' ? lenis.stop() : lenis.start();
+    }).observe(toggle, { attributes: true, attributeFilter: ['aria-expanded'] });
+  }
+
+  const ease = 'power3.out';
   const mm = gsap.matchMedia();
   mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // one entrance per section: the heading leads, its group follows with a short, uneven stagger
     document.querySelectorAll('main > section:not(.hero):not([data-moment])').forEach((section) => {
       const head = section.querySelector('[data-reveal]');
       const group = section.querySelector('[data-reveal-group]');
@@ -41,6 +60,35 @@
           stagger: { each: 0.07, ease: 'power1.in' },
         }, head ? 0.08 : 0);
       }
+    });
+
+    // depth on scroll, scrubbed to the smoothed position (Lenis already eases it, so scrub: true)
+    const hero = document.querySelector('.hero--huge');
+    const lamp = hero?.querySelector('.hero__subject');
+    const head = hero?.querySelector('.hero__head');
+    if (hero && lamp) {
+      // the mirror lives in the CSS `scale` property, so GSAP's transform never undoes it
+      const out = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
+      gsap.to(lamp, { yPercent: -9, ease: 'none', scrollTrigger: out });
+      if (head) gsap.to(head, { y: -70, autoAlpha: 0.15, ease: 'none', scrollTrigger: { ...out, end: '80% top' } });
+    }
+
+    // the spec and order lamps drift a little slower than the page
+    document.querySelectorAll('#aero-spec, #aero-order').forEach((frame) => {
+      gsap.fromTo(frame, { y: 36 }, {
+        y: -36, ease: 'none',
+        scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true },
+      });
+    });
+
+    // the benefit pictures settle from a slight zoom as they come into view
+    document.querySelectorAll('#benefits .panel').forEach((panel) => {
+      const pic = panel.querySelector('img, .frame');
+      if (!pic) return;
+      gsap.fromTo(pic, { scale: 1.06 }, {
+        scale: 1, ease: 'none',
+        scrollTrigger: { trigger: panel, start: 'top bottom', end: 'center 55%', scrub: true },
+      });
     });
   });
 

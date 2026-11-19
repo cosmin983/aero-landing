@@ -108,7 +108,7 @@ Radius family "soft": 8px controls, 12px panels and options, 20px cards and phot
 - **Product render:** `assets/objects/product-render/specs/aero.json`, stills in `assets/objects/product-render/specs/stills/`. Re-render with `node assets/objects/product-render/make-posters.mjs <spec> --profile <dir>`. Each section shows a different view or colour.
 - **Order card:** three radio options (Aero $149, Aero Charge $199, Aero Pair $279) and three colour swatches that swap the render.
 - **Photo-chapters (`#how`):** the pinned three-step setup story.
-- **Motion:** the hero enters once on load; Lenis smooth scroll is driven by GSAP's ticker; each other section reveals once (16px rise, 70ms stagger, power3.out, about 0.6s). Nothing moves under `prefers-reduced-motion`.
+- **Motion:** the hero enters once on load. Lenis (lerp 0.085, touch native) is driven by GSAP's ticker; anchor links glide 1.3s on an exponential ease-out; the page holds still while the phone menu is open. Each section reveals once (16px rise, 70ms stagger, power3.out, about 0.6s). Scrubbed depth: the hero lamp rises 9% and the headline fades as the hero scrolls out; the spec and order lamps drift ±36px; the benefit pictures settle from 1.06 scale. Nothing moves under `prefers-reduced-motion`.
 
 ## Do's and Don'ts
 
