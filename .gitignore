@@ -5,3 +5,4 @@ shots/
 .impeccable/review/
 .DS_Store
 .vercel
+.impeccable/config.local.json
