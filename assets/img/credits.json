@@ -1,0 +1,95 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f61684225.jpg",
+   "files": [
+    "photo-f61684225-500.jpg",
+    "photo-f61684225-960.jpg",
+    "photo-f61684225.jpg"
+   ],
+   "id": "f61684225",
+   "alt": "Laptop on a neat desk (Unsplash)",
+   "by": "Norbert Levajsics levajsics",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Laptop_on_a_neat_desk_(Unsplash).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f58856453.jpg",
+   "files": [
+    "photo-f58856453-500.jpg",
+    "photo-f58856453-960.jpg",
+    "photo-f58856453.jpg"
+   ],
+   "id": "f58856453",
+   "alt": "Desk Setup (Unsplash)",
+   "by": "Luke Chesser lukechesser",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Desk_Setup_(Unsplash).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f61681627.jpg",
+   "files": [
+    "photo-f61681627-500.jpg",
+    "photo-f61681627-960.jpg",
+    "photo-f61681627.jpg"
+   ],
+   "id": "f61681627",
+   "alt": "Clean minimalist office (Unsplash)",
+   "by": "Roman Bozhko romanbozhko",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Clean_minimalist_office_(Unsplash).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f61683524.jpg",
+   "files": [
+    "photo-f61683524-500.jpg",
+    "photo-f61683524-960.jpg",
+    "photo-f61683524.jpg"
+   ],
+   "id": "f61683524",
+   "alt": "Black and white computer desk (Unsplash)",
+   "by": "Oliur Rahman ultralinx",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Black_and_white_computer_desk_(Unsplash).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f61683702.jpg",
+   "files": [
+    "photo-f61683702-500.jpg",
+    "photo-f61683702-960.jpg",
+    "photo-f61683702.jpg"
+   ],
+   "id": "f61683702",
+   "alt": "Japanese Desk (Unsplash)",
+   "by": "Luke Chesser lukechesser",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Japanese_Desk_(Unsplash).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f61798207.jpg",
+   "files": [
+    "photo-f61798207-500.jpg",
+    "photo-f61798207-960.jpg",
+    "photo-f61798207.jpg"
+   ],
+   "id": "f61798207",
+   "alt": "Lamp on phone under lamp (Unsplash)",
+   "by": "Lin Zhizhao linz",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Lamp_on_phone_under_lamp_(Unsplash).jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

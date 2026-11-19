@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en" data-type="product" data-radius="soft" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aero: a smart desk lamp for people who work from home</title>
+<meta name="description" content="Aero turns from cool, bright light in the morning to warm, low light at night on its own, with phone control when you want it. Pre-order from $149.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aero: a smart desk lamp for people who work from home">
+<meta property="og:description" content="A desk lamp that follows the time of day on its own. Pre-order from $149.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#eeeeeb">
+<!-- <link rel="canonical" href="https://[the client's domain]/"> -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="product">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Figtree:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<link rel="stylesheet" href="assets/vendor/lenis.css">
+<style>
+:root {
+  --p-bg: #eeeeeb; --p-surface: #e1e1dd; --p-ink: #1c1d1f; --p-muted: #5c5e62;
+  --p-accent: #c2501b; --p-accent-ink: #ffffff; --p-action: #c2501b; --p-action-ink: #ffffff;
+  --p-inv-bg: #1c1d1f; --p-inv-surface: #28292b; --p-inv-ink: #eeeeeb; --p-inv-muted: #969796;
+  --p-inv-accent: #c2501b; --p-inv-accent-ink: #ffffff; --p-inv-action: #c2501b; --p-inv-action-ink: #ffffff;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-text: "Figtree", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --display-stretch: 96%;
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/photo-chapters/moment.js">
+<!-- page CSS: only what sits inside a visual or the order card, and one --p-h per card group -->
+<style>
+  ::selection { background: color-mix(in oklab, var(--p-accent) 28%, transparent); color: var(--p-ink); }
+  html { accent-color: var(--p-accent); -webkit-tap-highlight-color: transparent; }
+  .menu-card .panel { --p-h: 200px; }
+  .hero--product .hero__stage > #aero-hero { inset: -7% 0 0 0; }
+  #benefits .panel { --p-h: 340px; }
+  #benefits .panel--render { background: var(--g-alt); }
+  #benefits .panel--render > .frame { position: absolute; inset: 0; }
+  #specs .spec-frame { aspect-ratio: 5 / 4; }
+  #order .order-frame { aspect-ratio: 5 / 4; }
+  /* the order card: one fieldset of options, one of colours */
+  .order { display: grid; gap: var(--s-6); }
+  .order fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+  .order legend { font: 500 var(--t-label)/1.3 var(--font-text); color: var(--muted); margin-bottom: var(--s-3); padding: 0; }
+  .opt { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--s-1) var(--s-4); align-items: start;
+         padding: var(--s-4) var(--s-5); border: 1px solid var(--line); border-radius: var(--r-md); cursor: pointer;
+         transition: border-color 160ms ease, background-color 160ms ease; }
+  .opt input { margin: 4px 0 0; width: 18px; height: 18px; }
+  .opt__name { font: 500 var(--t-card)/1.3 var(--font-text); }
+  .opt__line { grid-column: 2; color: var(--muted); font-size: var(--t-small); line-height: 1.45; }
+  .opt__price { font: var(--display-weight) var(--t-card)/1.3 var(--font-display); font-variant-numeric: tabular-nums; grid-row: 1; grid-column: 3; }
+  .opt:has(input:checked) { border-color: var(--action); box-shadow: inset 0 0 0 1px var(--action); background: color-mix(in oklab, var(--p-accent) 5%, var(--p-bg)); }
+  .opt:has(input:focus-visible) { outline: 2px solid var(--action); outline-offset: 2px; }
+  @media (hover: hover) and (pointer: fine) { .opt:hover { border-color: color-mix(in oklab, var(--p-ink) 40%, transparent); } }
+  .swatches { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+  .swatch { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; padding: 0 var(--s-4) 0 var(--s-2);
+            border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: 500 var(--t-small)/1 var(--font-text); cursor: pointer;
+            transition: border-color 160ms ease; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  .swatch__dot { width: 28px; height: 28px; border-radius: 50%; background: var(--dot); box-shadow: inset 0 0 0 1px rgb(0 0 0 / .12); }
+  .swatch[aria-pressed="true"] { border-color: var(--action); box-shadow: inset 0 0 0 1px var(--action); }
+  .order__foot { display: grid; gap: var(--s-3); }
+  .concept-note { color: var(--muted); }
+  #specs .rows__value { font-variant-numeric: tabular-nums; }
+  .faq-frame { aspect-ratio: 4 / 3; margin-top: var(--s-5); }
+  .quotes { display: grid; gap: var(--s-7); align-content: start; }
+  .quotes .quote { display: grid; gap: var(--s-3); }
+  .quotes figcaption { color: var(--muted); }
+  @media (max-width: 639px) {
+    #benefits .panel { --p-h: 220px; }
+    .opt { padding: var(--s-4); }
+    #specs .rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-4); }
+    #specs .rows > li, #specs .rows > li:first-child { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); padding-block: var(--s-3); }
+    #specs .rows__value { grid-column: 1; text-align: left; justify-self: start; max-width: none; }
+  }
+</style>
+</head>
+<body>
+<!-- type: product (site-kind other: a smart desk lamp, a fictional concept product)
+     deal: hero product (Aero render, side view, graphite), palette steel-orange (stone ground like a home-office wall; the orange is the warm evening light Aero turns to), type bricolage, nav nav-cards, close close-type, footer footer-dark, rhythm dark-band (specs), buttons solid, mark stack
+     moments: photo-chapters in #how (the three setup steps) -->
+
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span>Aero</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item">
+        <a class="nav__link" href="#order">Lamps <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <a class="menu-card span-4" href="#order">
+              <div class="panel"><img class="frame__img" src="assets/objects/product-render/specs/stills/aero-three-quarter-ember-half.webp" width="496" height="476" loading="lazy" decoding="async" alt="Aero in ember orange" style="object-fit: contain"></div>
+              <span class="t-card">Aero, $149</span>
+              <span class="t-small muted">The lamp, its cable and power adapter</span>
+            </a>
+            <a class="menu-card span-4" href="#order">
+              <div class="panel"><img class="frame__img" src="assets/objects/product-render/specs/stills/aero-detail-base-graphite-half.webp" width="718" height="787" loading="lazy" decoding="async" alt="The base of Aero with its dial and status ring" style="object-fit: cover"></div>
+              <span class="t-card">Aero Charge, $199</span>
+              <span class="t-small muted">A wireless charging pad in the base</span>
+            </a>
+            <a class="menu-card span-4" href="#order">
+              <div class="panel"><img class="frame__img" src="assets/objects/product-render/specs/stills/aero-three-quarter-desk-chalk-half.webp" width="562" height="353" loading="lazy" decoding="async" alt="Aero in chalk white lighting a desk" style="object-fit: contain"></div>
+              <span class="t-card">Aero Pair, $279</span>
+              <span class="t-small muted">Two lamps for two desks</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="#how">Setup</a></div>
+      <div class="nav__item"><a class="nav__link" href="#specs">Specs</a></div>
+      <div class="nav__item"><a class="nav__link" href="#reviews">Reviews</a></div>
+      <div class="nav__item"><a class="nav__link" href="#faq">Questions</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#order">Pre-order Aero</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--product" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text hero__in">
+      <div class="hero__head">
+        <div>
+          <h1 id="hero-h">Smart desk lamp for long days at home</h1>
+          <p class="hero__lead">Aero shifts from cool morning light to warm evening light on its own, timed to your sunset. From $149.</p>
+        </div>
+        <div class="btn-row"><a class="btn btn--primary" href="#order">Pre-order Aero<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#how">See the setup</a></div>
+      </div>
+      <div class="hero__stage">
+        <div class="frame" id="aero-hero" data-product="assets/objects/product-render/specs/aero.json" data-product-place="stage" data-product-mode="image" data-product-view="side" data-product-color="graphite" aria-label="Aero in graphite, seen from the side: a round base with a dial, a slim upright and a flat light bar"></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="benefits" aria-labelledby="benefits-h">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 id="benefits-h">Aero follows your working day. <span class="muted">You stop adjusting the light.</span></h2>
+      </div>
+      <div class="grid" data-reveal-group>
+        <article class="card card--row card--open span-4">
+          <h3>Aero runs bright and cool in the morning</h3>
+          <p>Up to 1,000 lumens at 5,000 K while you read, write and take calls.</p>
+          <div class="panel"><img class="frame__img" src="assets/img/photo-f61684225.webp" srcset="assets/img/photo-f61684225-500.webp 500w, assets/img/photo-f61684225-960.webp 960w, assets/img/photo-f61684225.webp 1280w" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 100vw, 33vw" width="1280" height="853" alt="A laptop on a tidy white desk by a window in daylight" loading="lazy" decoding="async" data-source="stand-in" data-subject="a home-office desk in morning light"></div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>Aero turns warm and low after sunset</h3>
+          <p>From late afternoon it eases toward 2,700 K and dims, so your desk is not the brightest thing in the room at 9 pm.</p>
+          <div class="panel panel--render"><div class="frame" id="aero-desk" data-product="assets/objects/product-render/specs/aero.json" data-product-place="tile" data-product-mode="image" data-product-view="three-quarter" data-product-scene="desk" data-product-color="chalk" aria-label="Aero in chalk white over a desk at night, a warm pool of light on a sheet of paper"></div></div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>The base dial covers the rest</h3>
+          <p>Turn the dial on the base to dim, press it to switch modes. The app remembers what you changed.</p>
+          <div class="panel panel--render"><div class="frame" id="aero-dial" data-product="assets/objects/product-render/specs/aero.json" data-product-place="tile" data-product-mode="image" data-product-view="detail-base" data-product-color="graphite" aria-label="A close view of the dial and the lit status ring on Aero's base"></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how" data-moment="photo-chapters" aria-labelledby="how-h">
+    <div class="wrap mo-ph">
+      <div class="mo-ph__head"><h2 id="how-h">How Aero works</h2><p>Three steps and about five minutes. After that there is nothing to set.</p></div>
+      <ol class="mo-ph__list">
+        <li class="mo-ph__ch">
+          <figure class="mo-ph__pic"><img src="assets/img/photo-f61681627.webp" srcset="assets/img/photo-f61681627-960.webp 960w, assets/img/photo-f61681627.webp 1280w, assets/img/photo-f61681627-1920.webp 1920w" sizes="(max-width: 639px) 300vw, 100vw" loading="lazy" decoding="async" width="1280" height="871" alt="A long wooden desk with a computer and a plant against a white wall" data-source="stand-in" data-subject="a home-office desk"></figure>
+          <h3>Put Aero on your desk</h3>
+          <p>Plug in the USB-C cable. Aero starts in daylight mode straight away, with or without the app.</p>
+        </li>
+        <li class="mo-ph__ch">
+          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683524.webp" srcset="assets/img/photo-f61683524-960.webp 960w, assets/img/photo-f61683524.webp 1280w, assets/img/photo-f61683524-1920.webp 1920w" sizes="(max-width: 639px) 300vw, 100vw" loading="lazy" decoding="async" width="1280" height="1024" alt="A phone standing in a dock on a black and white desk beside headphones" data-source="stand-in" data-subject="a phone on a desk"></figure>
+          <h3>Pair Aero with the app</h3>
+          <p>Open the Aero app on iOS or Android and tap the lamp. It reads your location once for local sunrise and sunset.</p>
+        </li>
+        <li class="mo-ph__ch">
+          <figure class="mo-ph__pic"><img src="assets/img/photo-f61683702.webp" srcset="assets/img/photo-f61683702-960.webp 960w, assets/img/photo-f61683702.webp 1280w, assets/img/photo-f61683702-1920.webp 1920w" sizes="(max-width: 639px) 300vw, 100vw" loading="lazy" decoding="async" width="1280" height="853" alt="A desk by a window in the evening, the room going dark" data-source="stand-in" data-subject="a desk in the evening"></figure>
+          <h3>Aero follows the day</h3>
+          <p>Aero shifts colour and brightness every few minutes. Change anything on the dial and it returns to the schedule the next morning.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="specs" aria-labelledby="specs-h">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 id="specs-h">Specifications. <span class="muted">One lamp in three colours.</span></h2>
+      </div>
+      <div class="grid grid--top" data-reveal-group>
+        <ul class="rows rows--spec span-6">
+          <li><span class="rows__name">Colour temperature</span><span class="rows__value">2,700 to 6,500 K</span></li>
+          <li><span class="rows__name">Brightness</span><span class="rows__value">Up to 1,000 lm</span></li>
+          <li><span class="rows__name">Colour rendering</span><span class="rows__value">CRI 95</span></li>
+          <li><span class="rows__name">Light bar</span><span class="rows__value">40 cm, glare shield</span></li>
+          <li><span class="rows__name">Height</span><span class="rows__value">45 cm</span></li>
+          <li><span class="rows__name">Base</span><span class="rows__value">18 cm aluminium, rubber foot</span></li>
+          <li><span class="rows__name">Power</span><span class="rows__value">12 W over USB-C, adapter included</span></li>
+          <li><span class="rows__name">App</span><span class="rows__value">iOS 16 and Android 11 or later</span></li>
+          <li><span class="rows__name">Warranty</span><span class="rows__value">2 years</span></li>
+        </ul>
+        <div class="frame spec-frame span-6 start-7" id="aero-spec" data-product="assets/objects/product-render/specs/aero.json" data-product-place="tile" data-product-mode="image" data-product-view="three-quarter" data-product-color="chalk" aria-label="Aero in chalk white, three-quarter view"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reviews" aria-labelledby="reviews-h">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 id="reviews-h">Aero reviews from our beta testers</h2>
+      </div>
+      <div class="grid grid--top" data-reveal-group>
+        <div class="span-6 quotes">
+          <figure class="quote">
+            <blockquote>“By four o’clock I used to have a headache and the lamp on full. Now the light has already gone warm before I notice it’s late.”</blockquote>
+            <figcaption>Marta, product designer, Lisbon</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>“I set it up on a Monday and have not opened the app since.”</blockquote>
+            <figcaption>Jonas, software engineer, Hamburg</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>“The dial is what I use. One turn for a call, and it goes back to the schedule on its own.”</blockquote>
+            <figcaption>Tomás, accountant, Valencia</figcaption>
+          </figure>
+        </div>
+        <div class="frame frame--photo frame--split span-6 start-7">
+          <img class="frame__img" src="assets/img/photo-f58856453.webp" srcset="assets/img/photo-f58856453-500.webp 500w, assets/img/photo-f58856453-960.webp 960w, assets/img/photo-f58856453.webp 1280w" sizes="(max-width: 1023px) 100vw, 50vw" width="1280" height="853" alt="A wooden desk with a large monitor, keyboard and notebook in soft daylight" loading="lazy" decoding="async" data-source="stand-in" data-subject="a home-office desk">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="order" aria-labelledby="order-h">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2 id="order-h">Aero prices and colours. <span class="muted">Free to cancel until it ships.</span></h2>
+      </div>
+      <div class="grid grid--top" data-reveal-group>
+        <form class="order span-6" action="mailto:preorder@aero.example" method="post" enctype="text/plain">
+          <fieldset>
+            <legend>Choose a set</legend>
+            <label class="opt"><input type="radio" name="set" value="Aero" checked><span class="opt__name">Aero</span><span class="opt__price">$149</span><span class="opt__line">The lamp, a USB-C cable and a power adapter.</span></label>
+            <label class="opt"><input type="radio" name="set" value="Aero Charge"><span class="opt__name">Aero Charge</span><span class="opt__price">$199</span><span class="opt__line">Aero with a 15 W wireless charging pad in the base.</span></label>
+            <label class="opt"><input type="radio" name="set" value="Aero Pair"><span class="opt__name">Aero Pair</span><span class="opt__price">$279</span><span class="opt__line">Two Aero lamps, for two desks or one long one.</span></label>
+          </fieldset>
+          <fieldset>
+            <legend>Colour</legend>
+            <div class="swatches">
+              <button class="swatch" type="button" data-product-swatch="#aero-order" value="ember" aria-pressed="true" style="--dot: #c2501b"><span class="swatch__dot" aria-hidden="true"></span>Ember</button>
+              <button class="swatch" type="button" data-product-swatch="#aero-order" value="graphite" aria-pressed="false" style="--dot: #2b2c2f"><span class="swatch__dot" aria-hidden="true"></span>Graphite</button>
+              <button class="swatch" type="button" data-product-swatch="#aero-order" value="chalk" aria-pressed="false" style="--dot: #dcd9d2"><span class="swatch__dot" aria-hidden="true"></span>Chalk</button>
+            </div>
+            <input type="hidden" name="colour" value="Ember" data-colour-field>
+          </fieldset>
+          <div class="order__foot">
+            <div class="btn-row"><button class="btn btn--primary" type="submit">Pre-order Aero<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button></div>
+            <p class="t-small">Sends us your choice by email. We confirm within a day and charge nothing until your lamp ships.</p>
+          </div>
+        </form>
+        <div class="frame order-frame span-6 start-7" id="aero-order" data-product="assets/objects/product-render/specs/aero.json" data-product-place="tile" data-product-mode="image" data-product-view="three-quarter" data-product-color="ember" aria-label="Aero in the chosen colour, three-quarter view"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-4" data-reveal>
+          <h2 id="faq-h">Questions about Aero</h2>
+          <p class="muted">Something else on your mind? Write to us.</p>
+          <p><a class="link" href="mailto:hello@aero.example">Email the Aero team</a></p>
+          <div class="frame frame--photo faq-frame">
+            <img class="frame__img" src="assets/img/photo-f61798207.webp" srcset="assets/img/photo-f61798207-500.webp 500w, assets/img/photo-f61798207-960.webp 960w, assets/img/photo-f61798207.webp 1280w" sizes="(max-width: 1023px) 100vw, 42vw" width="1280" height="848" alt="A phone lying on a desk in warm evening light, its screen lit" loading="lazy" decoding="async" data-source="stand-in" data-subject="a phone on a desk in the evening">
+          </div>
+        </div>
+        <div class="faq span-6 start-7" data-reveal-group>
+          <div class="faq__item"><h3>When does Aero ship?</h3><p>Pre-orders ship in the order they came in. We email you a shipping date before we charge anything.</p></div>
+          <div class="faq__item"><h3>Does Aero need the app?</h3><p>No. Aero follows a standard day out of the box. The app adds your exact sunrise and sunset, schedules and scenes.</p></div>
+          <div class="faq__item"><h3>Can I cancel an Aero pre-order?</h3><p>Yes, at any time before it ships, from the link in your confirmation email.</p></div>
+          <div class="faq__item"><h3>Will Aero flicker on video calls?</h3><p>No. The LEDs run without PWM flicker, so cameras and screen recordings stay steady.</p></div>
+          <div class="faq__item"><h3>What if the Aero app is retired?</h3><p>Aero keeps its daily schedule and the dial without a phone. The app is for changes, not for running the lamp.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Reserve an Aero for your desk</h2>
+        <p>From $149. Free to cancel until it ships.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="#order">Pre-order Aero<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span>Aero</a>
+          <p class="footer__lede">A smart desk lamp that follows the time of day.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Lamp</h3><ul><li><a href="#benefits">Benefits</a></li><li><a href="#specs">Specs</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Setup</h3><ul><li><a href="#how">How it works</a></li><li><a href="#faq">Questions</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Buy</h3><ul><li><a href="#order">Prices</a></li><li><a href="#reviews">Reviews</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Contact</h3><ul><li><a href="mailto:hello@aero.example">Email us</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Aero</span>
+        <span class="concept-note">Aero is a concept product. Its specifications, prices and tester quotes were written for this design and are not real.</span>
+        <a class="credits" href="credits.html">Photographs via Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="assets/objects/product-render/auto.js"></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

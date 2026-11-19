@@ -1,0 +1,224 @@
+{
+ "id": "aero",
+ "made": "2026-11-19T16:39:44.100Z",
+ "px": 1100,
+ "grounds": [
+  "dark"
+ ],
+ "colors": [
+  "graphite",
+  "chalk",
+  "ember"
+ ],
+ "variants": {
+  "three-quarter": {
+   "view": "three-quarter",
+   "scene": null,
+   "off": false,
+   "grounds": [
+    "dark"
+   ],
+   "stills": {
+    "dark": {
+     "graphite": {
+      "file": "stills/aero-three-quarter-graphite-dark.webp",
+      "half": "stills/aero-three-quarter-graphite-dark-half.webp",
+      "w": 1208,
+      "h": 1161
+     },
+     "chalk": {
+      "file": "stills/aero-three-quarter-chalk-dark.webp",
+      "half": "stills/aero-three-quarter-chalk-dark-half.webp",
+      "w": 1208,
+      "h": 1161
+     },
+     "ember": {
+      "file": "stills/aero-three-quarter-ember-dark.webp",
+      "half": "stills/aero-three-quarter-ember-dark-half.webp",
+      "w": 1208,
+      "h": 1161
+     }
+    }
+   },
+   "box": [
+    0.0422,
+    0.0052,
+    0.9081,
+    0.9552
+   ],
+   "px": 1100
+  },
+  "side": {
+   "view": "side",
+   "scene": null,
+   "off": false,
+   "grounds": [
+    "light"
+   ],
+   "stills": {
+    "light": {
+     "graphite": {
+      "file": "stills/aero-side-graphite.webp",
+      "half": "stills/aero-side-graphite-half.webp",
+      "w": 1117,
+      "h": 953
+     },
+     "chalk": {
+      "file": "stills/aero-side-chalk.webp",
+      "half": "stills/aero-side-chalk-half.webp",
+      "w": 1117,
+      "h": 953
+     },
+     "ember": {
+      "file": "stills/aero-side-ember.webp",
+      "half": "stills/aero-side-ember-half.webp",
+      "w": 1117,
+      "h": 953
+     }
+    }
+   },
+   "box": [
+    0.0054,
+    0.0063,
+    0.9946,
+    0.9601
+   ],
+   "px": 1100
+  },
+  "detail-head": {
+   "view": "detail-head",
+   "scene": null,
+   "off": false,
+   "grounds": [
+    "light"
+   ],
+   "stills": {
+    "light": {
+     "graphite": {
+      "file": "stills/aero-detail-head-graphite.webp",
+      "half": "stills/aero-detail-head-graphite-half.webp",
+      "w": 1255,
+      "h": 1637
+     },
+     "chalk": {
+      "file": "stills/aero-detail-head-chalk.webp",
+      "half": "stills/aero-detail-head-chalk-half.webp",
+      "w": 1255,
+      "h": 1637
+     },
+     "ember": {
+      "file": "stills/aero-detail-head-ember.webp",
+      "half": "stills/aero-detail-head-ember-half.webp",
+      "w": 1255,
+      "h": 1637
+     }
+    }
+   },
+   "box": [
+    0.0048,
+    0.416,
+    0.8486,
+    1
+   ],
+   "focus": [
+    0.1494,
+    0.4146,
+    0.8506,
+    0.5854
+   ],
+   "cut": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "px": 1100
+  },
+  "detail-base": {
+   "view": "detail-base",
+   "scene": null,
+   "off": false,
+   "grounds": [
+    "light"
+   ],
+   "stills": {
+    "light": {
+     "graphite": {
+      "file": "stills/aero-detail-base-graphite.webp",
+      "half": "stills/aero-detail-base-graphite-half.webp",
+      "w": 1435,
+      "h": 1574
+     },
+     "chalk": {
+      "file": "stills/aero-detail-base-chalk.webp",
+      "half": "stills/aero-detail-base-chalk-half.webp",
+      "w": 1435,
+      "h": 1574
+     },
+     "ember": {
+      "file": "stills/aero-detail-base-ember.webp",
+      "half": "stills/aero-detail-base-ember-half.webp",
+      "w": 1435,
+      "h": 1574
+     }
+    }
+   },
+   "box": [
+    0.1373,
+    0,
+    0.7972,
+    0.6715
+   ],
+   "focus": [
+    0.2053,
+    0.3285,
+    0.7947,
+    0.6715
+   ],
+   "cut": [
+    0,
+    1,
+    0,
+    0
+   ],
+   "px": 1100
+  },
+  "three-quarter-desk": {
+   "view": "three-quarter",
+   "scene": "desk",
+   "off": false,
+   "grounds": [
+    "light"
+   ],
+   "stills": {
+    "light": {
+     "graphite": {
+      "file": "stills/aero-three-quarter-desk-graphite.webp",
+      "half": "stills/aero-three-quarter-desk-graphite-half.webp",
+      "w": 1124,
+      "h": 705
+     },
+     "chalk": {
+      "file": "stills/aero-three-quarter-desk-chalk.webp",
+      "half": "stills/aero-three-quarter-desk-chalk-half.webp",
+      "w": 1124,
+      "h": 705
+     },
+     "ember": {
+      "file": "stills/aero-three-quarter-desk-ember.webp",
+      "half": "stills/aero-three-quarter-desk-ember-half.webp",
+      "w": 1124,
+      "h": 705
+     }
+    }
+   },
+   "box": [
+    0.0053,
+    0.0085,
+    0.9849,
+    0.9901
+   ],
+   "px": 1100
+  }
+ }
+}

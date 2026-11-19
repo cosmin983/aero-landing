@@ -1,0 +1,6 @@
+[
+  {"check": "effect-kind", "target": "(the page)", "reason": "The brief asks for subtle scroll animations; Lenis smooth scroll is the user's standing preference for landing pages (their own lenis skill). Reveals run once, are short, and are off under reduced motion."},
+  {"check": "sample-label", "target": "span.concept-note", "reason": "Aero is a fictional concept product the brief invented; the page is deployed publicly, so one plain line saying its specs, prices and quotes are not real keeps it honest."},
+  {"check": "product-shown", "target": "div#aero-hero", "reason": "A desk lamp is taller than it is wide: its widest (side) view already fills the full height of the product stage, so 80% of the content width would push it past the fold."},
+  {"check": "container-edges", "target": "label.opt", "reason": "The three set options are bordered, selectable form controls (like plan cards); their text is padded inside each box the way a card pads its text."}
+]

@@ -1,0 +1,7 @@
+node_modules/
+.taste-skill/*
+!.taste-skill/waivers.json
+shots/
+.impeccable/review/
+.DS_Store
+.vercel
