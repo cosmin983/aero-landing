@@ -5,5 +5,56 @@
       "maxFindings": 5,
       "maxChars": 8000
     }
+  },
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-19T17:45:30.890Z",
+        "reason": "Claude triage: .ly-live pulse is in the kit's layout.css for heroes this page does not use; nothing on the page renders it"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-19T17:45:30.904Z",
+        "reason": "Claude triage: the halo is the kit's .hero__stage gradient, which layout.css switches off for a product render hero; not rendered"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-19T17:45:30.918Z",
+        "reason": "Claude triage: flagged boxes are full-bleed sections and hairline spec/FAQ rows whose text sits on the rule by design; no padded container is cramped"
+      },
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "credits.html"
+        ],
+        "createdAt": "2026-11-19T17:45:30.932Z",
+        "reason": "Claude triage: credits.html loads the kit stylesheet but renders no pulsing dot"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "credits.html"
+        ],
+        "createdAt": "2026-11-19T17:45:30.947Z",
+        "reason": "Claude triage: kit stylesheet gradient not rendered on the credits page"
+      }
+    ]
   }
 }
